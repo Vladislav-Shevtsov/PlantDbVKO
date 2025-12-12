@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//ToDo добавить базу из докера
+//Todo add docker database 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
