@@ -1,6 +1,7 @@
 using Flora.Api.Common.Abstractions;
 using Flora.Api.Common.Exceptions;
 using Flora.Api.Data;
+using MediatR;
 
 namespace Flora.Api.Features.Species.Delete
 {
@@ -13,7 +14,7 @@ namespace Flora.Api.Features.Species.Delete
             _dbContext = dbContext;
         }
 
-        public async Task Handle(DeleteSpeciesCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteSpeciesCommand request, CancellationToken cancellationToken)
         {
             var species = await _dbContext.Species.FindAsync(new object[] { request.Id }, cancellationToken);
 
@@ -22,6 +23,8 @@ namespace Flora.Api.Features.Species.Delete
 
             _dbContext.Species.Remove(species);
             await _dbContext.SaveChangesAsync(cancellationToken);
+
+            return Unit.Value;
         }
     }
 }

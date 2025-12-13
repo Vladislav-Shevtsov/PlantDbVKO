@@ -231,3 +231,11 @@
 /home/xatabadich/Documents/PlantDbVKO/src/Flora.Api/obj/Debug/net8.0/Flora.Api.pdb
 /home/xatabadich/Documents/PlantDbVKO/src/Flora.Api/obj/Debug/net8.0/Flora.Api.genruntimeconfig.cache
 /home/xatabadich/Documents/PlantDbVKO/src/Flora.Api/obj/Debug/net8.0/ref/Flora.Api.dll
+/home/xatabadich/Documents/PlantDbVKO/src/Flora.Api/bin/Debug/net8.0/Localization/Resources/de.json
+/home/xatabadich/Documents/PlantDbVKO/src/Flora.Api/bin/Debug/net8.0/Localization/Resources/en.json
+/home/xatabadich/Documents/PlantDbVKO/src/Flora.Api/bin/Debug/net8.0/Localization/Resources/fr.json
+/home/xatabadich/Documents/PlantDbVKO/src/Flora.Api/bin/Debug/net8.0/AutoMapper.dll
+/home/xatabadich/Documents/PlantDbVKO/src/Flora.Api/bin/Debug/net8.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/home/xatabadich/Documents/PlantDbVKO/src/Flora.Api/bin/Debug/net8.0/MediatR.dll
+/home/xatabadich/Documents/PlantDbVKO/src/Flora.Api/bin/Debug/net8.0/MediatR.Contracts.dll
+/home/xatabadich/Documents/PlantDbVKO/src/Flora.Api/bin/Debug/net8.0/MediatR.Extensions.Microsoft.DependencyInjection.dll

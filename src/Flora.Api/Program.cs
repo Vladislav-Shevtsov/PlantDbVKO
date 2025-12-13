@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MediatR;
 using Flora.Api.Data;
 using Flora.Api.Features.Species;
 using Flora.Api.Features.Taxonomy;
@@ -17,7 +18,7 @@ builder.Services.AddDbContext<FloraDbContext>(options =>
     options.UseNpgsql(connectionString, o => o.UseNetTopologySuite()));
 
 // Add MediatR for CQRS pattern
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddMediatR(typeof(Program));
 
 // Add AutoMapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);

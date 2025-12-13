@@ -1,6 +1,5 @@
 using AutoMapper;
 using Flora.Api.Domain;
-using Distribution = Flora.Api.Domain.Distribution;
 
 namespace Flora.Api.Features.Species
 {
@@ -19,7 +18,7 @@ namespace Flora.Api.Features.Species
 
             CreateMap<Media, MediaDto>();
 
-            CreateMap<Distribution, DistributionDto>()
+            CreateMap<Domain.Distribution, DistributionDto>()
                 .ForMember(dest => dest.Latitude, opt => opt.MapFrom(src => src.Location.Y))
                 .ForMember(dest => dest.Longitude, opt => opt.MapFrom(src => src.Location.X));
         }
