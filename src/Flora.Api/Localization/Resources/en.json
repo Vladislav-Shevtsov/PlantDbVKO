@@ -1,0 +1,14 @@
+{
+  "species.title": "Species",
+  "species.scientific_name": "Scientific Name",
+  "species.author": "Author",
+  "species.description": "Description",
+  "species.created": "Species created successfully",
+  "species.updated": "Species updated successfully",
+  "species.deleted": "Species deleted successfully",
+  "species.not_found": "Species not found",
+  "taxonomy.title": "Taxonomy",
+  "taxonomy.hierarchy": "Taxonomy Hierarchy",
+  "distribution.title": "Distribution",
+  "distribution.map": "Distribution Map"
+}

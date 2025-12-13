@@ -1,10 +1,42 @@
+using Microsoft.EntityFrameworkCore;
+using Flora.Api.Data;
+using Flora.Api.Features.Species;
+using Flora.Api.Features.Taxonomy;
+using Flora.Api.Features.Distribution;
+using Flora.Api.Localization;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//Todo add docker database 
+
+// Add DbContext with PostgreSQL
+var connectionString = builder.Configuration.GetConnectionString("Default");
+builder.Services.AddDbContext<FloraDbContext>(options =>
+    options.UseNpgsql(connectionString, o => o.UseNetTopologySuite()));
+
+// Add MediatR for CQRS pattern
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+// Add AutoMapper
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+// Add Localization service
+builder.Services.AddSingleton<ILocalizationService, LocalizationService>();
+
+// Add CORS for Vue.js frontend
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowVueApp", policy =>
+    {
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -15,7 +47,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowVueApp");
 
+// Map feature endpoints
+app.MapSpeciesEndpoints();
+app.MapTaxonomyEndpoints();
+app.MapDistributionEndpoints();
+
+// Keep the sample weather forecast endpoint for now
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -23,7 +62,7 @@ var summaries = new[]
 
 app.MapGet("/weatherforecast", () =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
+    var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

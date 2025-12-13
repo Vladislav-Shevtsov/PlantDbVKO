@@ -7,7 +7,7 @@ namespace Flora.Api.Domain
 {
     public class Translation
     {
-        Guid Id { get; set; }
+        public Guid Id { get; set; }
         public string LanguageCode { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

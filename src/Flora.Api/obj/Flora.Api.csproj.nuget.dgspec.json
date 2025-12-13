@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/vladislav/Documents/Slice_architecture/src/Flora.Api/Flora.Api.csproj": {}
+    "/home/xatabadich/Documents/PlantDbVKO/src/Flora.Api/Flora.Api.csproj": {}
   },
   "projects": {
-    "/Users/vladislav/Documents/Slice_architecture/src/Flora.Api/Flora.Api.csproj": {
+    "/home/xatabadich/Documents/PlantDbVKO/src/Flora.Api/Flora.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/vladislav/Documents/Slice_architecture/src/Flora.Api/Flora.Api.csproj",
+        "projectUniqueName": "/home/xatabadich/Documents/PlantDbVKO/src/Flora.Api/Flora.Api.csproj",
         "projectName": "Flora.Api",
-        "projectPath": "/Users/vladislav/Documents/Slice_architecture/src/Flora.Api/Flora.Api.csproj",
-        "packagesPath": "/Users/vladislav/.nuget/packages/",
-        "outputPath": "/Users/vladislav/Documents/Slice_architecture/src/Flora.Api/obj/",
+        "projectPath": "/home/xatabadich/Documents/PlantDbVKO/src/Flora.Api/Flora.Api.csproj",
+        "packagesPath": "/home/xatabadich/.nuget/packages/",
+        "outputPath": "/home/xatabadich/Documents/PlantDbVKO/src/Flora.Api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/vladislav/.nuget/NuGet/NuGet.Config"
+          "/home/xatabadich/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -32,12 +32,33 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.2.0, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.1.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.1, )"
@@ -84,7 +105,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/xatabadich/.dotnet/sdk/8.0.416/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

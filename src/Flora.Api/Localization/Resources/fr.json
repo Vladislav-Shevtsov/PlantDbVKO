@@ -1,0 +1,14 @@
+{
+  "species.title": "Espèce",
+  "species.scientific_name": "Nom scientifique",
+  "species.author": "Auteur",
+  "species.description": "Description",
+  "species.created": "Espèce créée avec succès",
+  "species.updated": "Espèce mise à jour avec succès",
+  "species.deleted": "Espèce supprimée avec succès",
+  "species.not_found": "Espèce non trouvée",
+  "taxonomy.title": "Taxonomie",
+  "taxonomy.hierarchy": "Hiérarchie taxonomique",
+  "distribution.title": "Distribution",
+  "distribution.map": "Carte de distribution"
+}
