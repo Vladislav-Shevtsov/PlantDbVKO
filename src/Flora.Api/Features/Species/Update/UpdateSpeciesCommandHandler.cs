@@ -26,7 +26,7 @@ namespace Flora.Api.Features.Species.Update
             species.ScientificName = request.ScientificName;
             species.Author = request.Author;
             species.Description = request.Description;
-            species.TaxanomyId = request.TaxonomyId;
+            species.TaxonomyId = request.TaxonomyId;
 
             _dbContext.Species.Update(species);
             await _dbContext.SaveChangesAsync(cancellationToken);

@@ -10,7 +10,7 @@ namespace Flora.Api.Data
         }
 
         public DbSet<Species> Species { get; set; }
-        public DbSet<Taxanomy> Taxanomies { get; set; }
+        public DbSet<Taxonomy> Taxonomies { get; set; }
         public DbSet<Translation> Translations { get; set; }
         public DbSet<Distribution> Distributions { get; set; }
         public DbSet<Media> Medias { get; set; }
@@ -25,13 +25,13 @@ namespace Flora.Api.Data
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.ScientificName).IsRequired();
-                entity.HasOne(e => e.Taxanomy)
+                entity.HasOne(e => e.Taxonomy)
                     .WithMany(t => t.Species)
-                    .HasForeignKey(e => e.TaxanomyId);
+                    .HasForeignKey(e => e.TaxonomyId);
             });
 
             // Taxonomy configuration
-            modelBuilder.Entity<Taxanomy>(entity =>
+            modelBuilder.Entity<Taxonomy>(entity =>
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Name).IsRequired();

@@ -15,7 +15,7 @@ namespace Flora.Api.Features.Taxonomy.GetHierarchy
 
         public async Task<List<TaxonomyNodeDto>> Handle(GetTaxonomyHierarchyQuery request, CancellationToken cancellationToken)
         {
-            var rootTaxonomies = await _dbContext.Taxanomies
+            var rootTaxonomies = await _dbContext.Taxonomies
                 .Where(t => t.ParentId == null)
                 .Include(t => t.Children)
                 .Include(t => t.Species)
@@ -24,7 +24,7 @@ namespace Flora.Api.Features.Taxonomy.GetHierarchy
             return rootTaxonomies.Select(t => MapToNodeDto(t)).ToList();
         }
 
-        private TaxonomyNodeDto MapToNodeDto(Domain.Taxanomy taxonomy)
+        private TaxonomyNodeDto MapToNodeDto(Domain.Taxonomy taxonomy)
         {
             return new TaxonomyNodeDto
             {

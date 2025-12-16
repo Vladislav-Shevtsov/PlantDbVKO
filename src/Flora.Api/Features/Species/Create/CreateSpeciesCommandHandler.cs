@@ -24,7 +24,7 @@ namespace Flora.Api.Features.Species.Create
                 ScientificName = request.ScientificName,
                 Author = request.Author,
                 Description = request.Description,
-                TaxanomyId = request.TaxonomyId
+                TaxonomyId = request.TaxonomyId
             };
 
             _dbContext.Species.Add(species);

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Flora.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7e33a7f5ece37163ca49cd378a6447e77399d70d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+13c38fc47a5745214c2ee9af19f8cd70d52c69ad")]
 [assembly: System.Reflection.AssemblyProductAttribute("Flora.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Flora.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
