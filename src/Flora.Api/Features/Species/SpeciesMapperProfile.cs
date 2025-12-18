@@ -19,8 +19,20 @@ namespace Flora.Api.Features.Species
             CreateMap<Media, MediaDto>();
 
             CreateMap<Domain.Distribution, DistributionDto>()
-                .ForMember(dest => dest.Latitude, opt => opt.MapFrom(src => src.Location.Y))
-                .ForMember(dest => dest.Longitude, opt => opt.MapFrom(src => src.Location.X));
+                .ForMember(dest => dest.Latitude, opt => opt.MapFrom(src => ParseLatitude(src.Location)))
+                .ForMember(dest => dest.Longitude, opt => opt.MapFrom(src => ParseLongitude(src.Location)));
+        }
+
+        private static double ParseLatitude(string? location)
+        {
+            if (string.IsNullOrEmpty(location) || !location.Contains(',')) return 0.0;
+            return double.Parse(location.Split(',')[0]);
+        }
+
+        private static double ParseLongitude(string? location)
+        {
+            if (string.IsNullOrEmpty(location) || !location.Contains(',')) return 0.0;
+            return double.Parse(location.Split(',')[1]);
         }
     }
 }

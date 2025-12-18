@@ -25,7 +25,13 @@ namespace Flora.Api.Features.Species.List
                 query = query.Where(s => s.ScientificName.Contains(request.SearchTerm));
             }
 
+            if (request.TaxonomyId.HasValue)
+            {
+                query = query.Where(s => s.TaxonomyId == request.TaxonomyId.Value);
+            }
+
             var species = await query
+                .OrderBy(s => s.ScientificName)
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .ToListAsync(cancellationToken);

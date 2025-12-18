@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using NetTopologySuite.Geometries;
 
 #nullable disable
 
@@ -12,25 +11,22 @@ namespace Flora.Api.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterDatabase()
-                .Annotation("Npgsql:PostgresExtension:postgis", ",,");
-
             migrationBuilder.CreateTable(
-                name: "Taxanomies",
+                name: "Taxonomies",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Rank = table.Column<string>(type: "text", nullable: false),
+                    Rank = table.Column<string>(type: "text", nullable: true),
                     ParentId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Taxanomies", x => x.Id);
+                    table.PrimaryKey("PK_Taxonomies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Taxanomies_Taxanomies_ParentId",
+                        name: "FK_Taxonomies_Taxonomies_ParentId",
                         column: x => x.ParentId,
-                        principalTable: "Taxanomies",
+                        principalTable: "Taxonomies",
                         principalColumn: "Id");
                 });
 
@@ -40,17 +36,17 @@ namespace Flora.Api.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ScientificName = table.Column<string>(type: "text", nullable: false),
-                    Author = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
-                    TaxanomyId = table.Column<Guid>(type: "uuid", nullable: false)
+                    Author = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    TaxonomyId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Species", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Species_Taxanomies_TaxanomyId",
-                        column: x => x.TaxanomyId,
-                        principalTable: "Taxanomies",
+                        name: "FK_Species_Taxonomies_TaxonomyId",
+                        column: x => x.TaxonomyId,
+                        principalTable: "Taxonomies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -60,9 +56,9 @@ namespace Flora.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Location = table.Column<Point>(type: "geometry", nullable: false),
-                    RegionCode = table.Column<string>(type: "text", nullable: false),
-                    Source = table.Column<string>(type: "text", nullable: false),
+                    Location = table.Column<string>(type: "text", nullable: true),
+                    RegionCode = table.Column<string>(type: "text", nullable: true),
+                    Source = table.Column<string>(type: "text", nullable: true),
                     CollectedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     SpeciesId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
@@ -82,9 +78,9 @@ namespace Flora.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Url = table.Column<string>(type: "text", nullable: false),
-                    AltText = table.Column<string>(type: "text", nullable: false),
-                    Type = table.Column<string>(type: "text", nullable: false),
+                    Url = table.Column<string>(type: "text", nullable: true),
+                    AltText = table.Column<string>(type: "text", nullable: true),
+                    Type = table.Column<string>(type: "text", nullable: true),
                     SpeciesId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -103,8 +99,8 @@ namespace Flora.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Accession = table.Column<string>(type: "text", nullable: false),
-                    Data = table.Column<string>(type: "text", nullable: false),
+                    Accession = table.Column<string>(type: "text", nullable: true),
+                    Data = table.Column<string>(type: "text", nullable: true),
                     Length = table.Column<int>(type: "integer", nullable: false),
                     SpeciesId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
@@ -124,10 +120,10 @@ namespace Flora.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    LanguageCode = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
-                    TerrainDescription = table.Column<string>(type: "text", nullable: false),
+                    LanguageCode = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    TerrainDescription = table.Column<string>(type: "text", nullable: true),
                     SpeciesId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -157,13 +153,13 @@ namespace Flora.Api.Migrations
                 column: "SpeciesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Species_TaxanomyId",
+                name: "IX_Species_TaxonomyId",
                 table: "Species",
-                column: "TaxanomyId");
+                column: "TaxonomyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Taxanomies_ParentId",
-                table: "Taxanomies",
+                name: "IX_Taxonomies_ParentId",
+                table: "Taxonomies",
                 column: "ParentId");
 
             migrationBuilder.CreateIndex(
@@ -191,7 +187,7 @@ namespace Flora.Api.Migrations
                 name: "Species");
 
             migrationBuilder.DropTable(
-                name: "Taxanomies");
+                name: "Taxonomies");
         }
     }
 }

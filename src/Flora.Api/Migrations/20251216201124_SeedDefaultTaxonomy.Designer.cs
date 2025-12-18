@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NetTopologySuite.Geometries;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -13,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Flora.Api.Migrations
 {
     [DbContext(typeof(FloraDbContext))]
-    [Migration("20251212110658_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20251216201124_SeedDefaultTaxonomy")]
+    partial class SeedDefaultTaxonomy
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +23,6 @@ namespace Flora.Api.Migrations
                 .HasAnnotation("ProductVersion", "8.0.22")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "postgis");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Flora.Api.Domain.Distribution", b =>
@@ -36,16 +34,13 @@ namespace Flora.Api.Migrations
                     b.Property<DateTime>("CollectedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Point>("Location")
-                        .IsRequired()
-                        .HasColumnType("geometry");
+                    b.Property<string>("Location")
+                        .HasColumnType("text");
 
                     b.Property<string>("RegionCode")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Source")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<Guid>("SpeciesId")
@@ -65,18 +60,15 @@ namespace Flora.Api.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("AltText")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<Guid>("SpeciesId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Url")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -93,11 +85,9 @@ namespace Flora.Api.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Accession")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Data")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Length")
@@ -120,28 +110,26 @@ namespace Flora.Api.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Author")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ScientificName")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("TaxanomyId")
+                    b.Property<Guid>("TaxonomyId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TaxanomyId");
+                    b.HasIndex("TaxonomyId");
 
                     b.ToTable("Species");
                 });
 
-            modelBuilder.Entity("Flora.Api.Domain.Taxanomy", b =>
+            modelBuilder.Entity("Flora.Api.Domain.Taxonomy", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -155,14 +143,21 @@ namespace Flora.Api.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Rank")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Taxanomies");
+                    b.ToTable("Taxonomies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Name = "Unknown",
+                            Rank = "Unknown"
+                        });
                 });
 
             modelBuilder.Entity("Flora.Api.Domain.Translation", b =>
@@ -172,22 +167,18 @@ namespace Flora.Api.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("LanguageCode")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<Guid>("SpeciesId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("TerrainDescription")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -232,18 +223,18 @@ namespace Flora.Api.Migrations
 
             modelBuilder.Entity("Flora.Api.Domain.Species", b =>
                 {
-                    b.HasOne("Flora.Api.Domain.Taxanomy", "Taxanomy")
+                    b.HasOne("Flora.Api.Domain.Taxonomy", "Taxonomy")
                         .WithMany("Species")
-                        .HasForeignKey("TaxanomyId")
+                        .HasForeignKey("TaxonomyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Taxanomy");
+                    b.Navigation("Taxonomy");
                 });
 
-            modelBuilder.Entity("Flora.Api.Domain.Taxanomy", b =>
+            modelBuilder.Entity("Flora.Api.Domain.Taxonomy", b =>
                 {
-                    b.HasOne("Flora.Api.Domain.Taxanomy", "Parent")
+                    b.HasOne("Flora.Api.Domain.Taxonomy", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
 
@@ -272,7 +263,7 @@ namespace Flora.Api.Migrations
                     b.Navigation("Translations");
                 });
 
-            modelBuilder.Entity("Flora.Api.Domain.Taxanomy", b =>
+            modelBuilder.Entity("Flora.Api.Domain.Taxonomy", b =>
                 {
                     b.Navigation("Children");
 

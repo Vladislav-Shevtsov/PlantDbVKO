@@ -7,6 +7,6 @@ namespace Flora.Api.Features.Species.Create
         public string ScientificName { get; set; } = string.Empty;
         public string? Author { get; set; }
         public string? Description { get; set; }
-        public Guid TaxonomyId { get; set; }
+        public string TaxonomyId { get; set; } = string.Empty;
     }
 }

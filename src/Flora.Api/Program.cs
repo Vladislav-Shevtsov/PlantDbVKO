@@ -36,7 +36,7 @@ builder.Services.AddSwaggerGen();
 // Add DbContext with PostgreSQL
 var connectionString = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<FloraDbContext>(options =>
-    options.UseNpgsql(connectionString, o => o.UseNetTopologySuite()));
+    options.UseNpgsql(connectionString));
 
 // Add MediatR for CQRS pattern
 builder.Services.AddMediatR(typeof(Program));

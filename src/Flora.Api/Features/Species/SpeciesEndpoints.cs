@@ -46,13 +46,15 @@ namespace Flora.Api.Features.Species
             IMediator mediator,
             int pageNumber = 1,
             int pageSize = 10,
-            string? searchTerm = null)
+            string? searchTerm = null,
+            Guid? taxonomyId = null)
         {
             var query = new ListSpeciesQuery
             {
                 PageNumber = pageNumber,
                 PageSize = pageSize,
-                SearchTerm = searchTerm
+                SearchTerm = searchTerm,
+                TaxonomyId = taxonomyId
             };
             var result = await mediator.Send(query);
             return Results.Ok(result);

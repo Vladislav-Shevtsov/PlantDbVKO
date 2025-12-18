@@ -75,6 +75,9 @@ namespace Flora.Api.Data
                     .WithMany(s => s.Sequences)
                     .HasForeignKey(e => e.SpeciesId);
             });
+
+            // Seed default taxonomy
+            modelBuilder.Entity<Taxonomy>().HasData(new Taxonomy { Id = Guid.Parse("11111111-1111-1111-1111-111111111111"), Name = "Unknown", Rank = "Unknown" });
         }
     }
 }

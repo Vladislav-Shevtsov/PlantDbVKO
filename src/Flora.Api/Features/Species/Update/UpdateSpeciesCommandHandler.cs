@@ -23,10 +23,12 @@ namespace Flora.Api.Features.Species.Update
             if (species == null)
                 throw new NotFoundException(nameof(Domain.Species), request.Id);
 
+            Guid taxonomyId = string.IsNullOrEmpty(request.TaxonomyId) ? Guid.Parse("11111111-1111-1111-1111-111111111111") : Guid.Parse(request.TaxonomyId);
+
             species.ScientificName = request.ScientificName;
             species.Author = request.Author;
             species.Description = request.Description;
-            species.TaxonomyId = request.TaxonomyId;
+            species.TaxonomyId = taxonomyId;
 
             _dbContext.Species.Update(species);
             await _dbContext.SaveChangesAsync(cancellationToken);

@@ -31,8 +31,8 @@ namespace Flora.Api.Features.Distribution.GetBySpecies
             return distributions.Select(d => new DistributionDetailDto
             {
                 Id = d.Id,
-                Latitude = d.Location.Y,
-                Longitude = d.Location.X,
+                Latitude = d.Location != null ? double.Parse(d.Location.Split(',')[0]) : 0,
+                Longitude = d.Location != null ? double.Parse(d.Location.Split(',')[1]) : 0,
                 RegionCode = d.RegionCode,
                 Source = d.Source,
                 CollectedDate = d.CollectedDate
