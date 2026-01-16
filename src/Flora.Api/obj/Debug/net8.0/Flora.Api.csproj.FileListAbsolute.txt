@@ -270,3 +270,4 @@
 /Users/vladislav/Documents/Slice_architecture/src/Flora.Api/bin/Debug/net8.0/System.Text.Encodings.Web.dll
 /Users/vladislav/Documents/Slice_architecture/src/Flora.Api/bin/Debug/net8.0/System.Text.Json.dll
 /Users/vladislav/Documents/Slice_architecture/src/Flora.Api/bin/Debug/net8.0/runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll
+/Users/vladislav/Documents/Slice_architecture/src/Flora.Api/bin/Debug/net8.0/package-lock.json

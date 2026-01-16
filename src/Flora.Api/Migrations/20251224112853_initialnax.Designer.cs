@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Flora.Api.Migrations
 {
     [DbContext(typeof(FloraDbContext))]
-    [Migration("20251216201124_SeedDefaultTaxonomy")]
-    partial class SeedDefaultTaxonomy
+    [Migration("20251224112853_initialnax")]
+    partial class initialnax
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

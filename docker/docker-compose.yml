@@ -8,7 +8,7 @@ services:
       POSTGRES_USER: flora
       POSTGRES_PASSWORD: flora_pw
       POSTGRES_DB: flora
-    ports: ["5432:5432"]
+    ports: ["55432:5432"]
     volumes:
       - pgdata:/var/lib/postgresql/data
 volumes:

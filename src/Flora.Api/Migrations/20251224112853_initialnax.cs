@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Flora.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class initialnax : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -136,6 +136,11 @@ namespace Flora.Api.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Taxonomies",
+                columns: new[] { "Id", "Name", "ParentId", "Rank" },
+                values: new object[] { new Guid("11111111-1111-1111-1111-111111111111"), "Unknown", null, "Unknown" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Distributions_SpeciesId",
